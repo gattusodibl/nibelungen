@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Die Nibelungen — Prüfungsvorbereitung</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A227;
+  --gold-light: #E8C84A;
+  --gold-pale: #F5E6A3;
+  --blood: #7A1A1A;
+  --blood-mid: #A02020;
+  --ink: #12100A;
+  --parchment: #F4ECD5;
+  --parchment-dark: #E6D8B8;
+  --stone: #2A2318;
+  --stone-mid: #3D3525;
+  --mist: #8C7A56;
+  --shadow: rgba(0,0,0,0.7);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--ink);
+  color: var(--parchment);
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ─── BACKGROUND TEXTURE ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(201,162,39,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(122,26,26,0.08) 0%, transparent 60%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ─── HEADER ─── */
+header {
+  text-align: center;
+  padding: 56px 24px 40px;
+  background: linear-gradient(180deg, #0a0805 0%, #12100A 100%);
+  border-bottom: 1px solid rgba(201,162,39,0.25);
+  position: relative;
+  overflow: hidden;
+}
+header::after {
+  content: '⚔';
+  position: absolute; bottom: -24px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px; color: var(--gold); opacity: 0.15;
+}
+.header-rune { font-size: 13px; letter-spacing: 10px; color: var(--gold); opacity: 0.5; margin-bottom: 14px; }
+h1.main-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(28px, 6vw, 58px);
+  color: var(--gold);
+  text-shadow: 0 0 60px rgba(201,162,39,0.3);
+  letter-spacing: 3px;
+  line-height: 1.15;
+}
+.main-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(11px, 1.8vw, 14px);
+  color: var(--mist);
+  letter-spacing: 5px;
+  margin-top: 10px;
+}
+
+/* ─── NAV TABS ─── */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px 16px;
+  background: #0d0b07;
+  border-bottom: 1px solid rgba(201,162,39,0.15);
+  position: sticky; top: 0; z-index: 50;
+}
+.tab-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid rgba(201,162,39,0.3);
+  color: var(--mist);
+  cursor: pointer;
+  transition: all 0.25s;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.tab-btn:hover { border-color: var(--gold); color: var(--gold-light); }
+.tab-btn.active {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+  font-weight: 700;
+}
+
+/* ─── MAIN CONTENT ─── */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  position: relative; z-index: 1;
+}
+
+.section { display: none; }
+.section.active { display: block; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+/* ─── SECTION HEADINGS ─── */
+.sec-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  margin-bottom: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(201,162,39,0.2);
+}
+.sec-intro {
+  color: var(--mist);
+  font-size: 15px;
+  margin-bottom: 28px;
+  font-style: italic;
+}
+
+/* ─── CHAPTER CARDS ─── */
+.chapter {
+  margin-bottom: 32px;
+  border: 1px solid rgba(201,162,39,0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.chapter-header {
+  background: linear-gradient(90deg, #1e1a10 0%, #252014 100%);
+  padding: 14px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+}
+.chapter-header:hover { background: #2a2418; }
+.chapter-num {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  opacity: 0.7;
+}
+.chapter-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(13px, 2.5vw, 17px);
+  color: var(--parchment);
+  font-weight: 600;
+}
+.chapter-toggle { color: var(--gold); font-size: 18px; transition: transform 0.3s; }
+.chapter.open .chapter-toggle { transform: rotate(180deg); }
+.chapter-body {
+  display: none;
+  padding: 20px 24px;
+  background: #100e08;
+  border-top: 1px solid rgba(201,162,39,0.1);
+}
+.chapter.open .chapter-body { display: block; }
+
+.scene {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(201,162,39,0.08);
+}
+.scene:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.scene-title {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: var(--blood-mid);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.scene p { color: #c8b890; line-height: 1.75; }
+.scene p strong { color: var(--gold-light); font-weight: 600; }
+.scene p em { color: var(--parchment); font-style: italic; }
+
+/* ─── FIGUREN ─── */
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+.char-card {
+  background: #1a1710;
+  border: 1px solid rgba(201,162,39,0.2);
+  border-radius: 3px;
+  padding: 18px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.char-card:hover { border-color: rgba(201,162,39,0.5); transform: translateY(-2px); }
+.char-name {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  color: var(--gold);
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+.char-role {
+  font-size: 11px;
+  color: var(--blood-mid);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-family: 'Cinzel', serif;
+}
+.char-desc { font-size: 14px; color: #b8a880; line-height: 1.65; }
+.char-desc strong { color: var(--gold-pale); }
+.char-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.char-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border: 1px solid rgba(201,162,39,0.25);
+  border-radius: 20px;
+  color: var(--mist);
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+}
+
+/* ─── ZUSAMMENFASSUNGEN ─── */
+.summary-card {
+  background: #15120b;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 3px 3px 0;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.summary-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.summary-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: var(--parchment);
+  margin-bottom: 16px;
+}
+.summary-text { color: #c8b890; line-height: 1.8; }
+.summary-text p { margin-bottom: 12px; }
+.summary-text p:last-child { margin-bottom: 0; }
+.summary-text strong { color: var(--gold-light); }
+.summary-text em { color: var(--parchment); font-style: italic; }
+.timer-btn {
+  margin-top: 14px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 7px 16px;
+  background: rgba(201,162,39,0.1);
+  border: 1px solid rgba(201,162,39,0.35);
+  color: var(--gold);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.timer-btn:hover { background: rgba(201,162,39,0.2); }
+.timer-display { font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 14px; margin-left: 12px; }
+
+/* ─── QUIZ ─── */
+.quiz-card {
+  background: #15120b;
+  border: 1px solid rgba(201,162,39,0.15);
+  border-radius: 3px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.quiz-q {
+  padding: 16px 20px;
+  background: #1e1a10;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  color: var(--parchment);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  transition: background 0.2s;
+}
+.quiz-q:hover { background: #252014; }
+.quiz-q-icon { color: var(--gold); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+.quiz-a {
+  display: none;
+  padding: 16px 20px;
+  color: #c8b890;
+  line-height: 1.75;
+  border-top: 1px solid rgba(201,162,39,0.1);
+}
+.quiz-a strong { color: var(--gold-light); }
+.quiz-a em { color: var(--parchment); font-style: italic; }
+.quiz-card.open .quiz-a { display: block; animation: fadeIn 0.3s ease; }
+.quiz-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.filter-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid rgba(201,162,39,0.3);
+  color: var(--mist);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+.filter-btn.active, .filter-btn:hover { background: rgba(201,162,39,0.15); color: var(--gold); border-color: var(--gold); }
+
+/* ─── QUIZ SPIEL ─── */
+.quiz-game {
+  text-align: center;
+  padding: 20px 0;
+}
+.quiz-progress {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 28px;
+}
+.progress-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,162,39,0.4);
+  background: transparent;
+  transition: background 0.3s;
+}
+.progress-dot.done { background: var(--gold); }
+.progress-dot.current { background: var(--blood-mid); border-color: var(--blood-mid); }
+.question-box {
+  background: #1a1710;
+  border: 1px solid rgba(201,162,39,0.2);
+  border-radius: 4px;
+  padding: 28px 24px;
+  margin-bottom: 20px;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: var(--parchment);
+  line-height: 1.5;
+}
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.option-btn {
+  padding: 12px 16px;
+  background: #1a1710;
+  border: 1px solid rgba(201,162,39,0.2);
+  color: #c8b890;
+  cursor: pointer;
+  border-radius: 3px;
+  font-family: 'Crimson Pro', serif;
+  font-size: 15px;
+  text-align: left;
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.option-btn:hover:not(:disabled) { border-color: var(--gold); color: var(--parchment); background: #252014; }
+.option-btn.correct { background: #1a3a1a; border-color: #5a9a5a; color: #90d090; }
+.option-btn.wrong { background: #3a1a1a; border-color: #9a3a3a; color: #d09090; }
+.joker-bar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.joker-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 7px 14px;
+  background: rgba(201,162,39,0.1);
+  border: 1px solid rgba(201,162,39,0.3);
+  color: var(--gold);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.joker-btn:hover:not(:disabled) { background: rgba(201,162,39,0.25); }
+.joker-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.quiz-score {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: var(--mist);
+  margin-bottom: 12px;
+}
+.feedback {
+  padding: 12px 16px;
+  border-radius: 3px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  display: none;
+}
+.feedback.show { display: block; animation: fadeIn 0.3s; }
+.feedback.correct-fb { background: #1a3a1a; border: 1px solid #5a9a5a; color: #90d090; }
+.feedback.wrong-fb { background: #3a1a1a; border: 1px solid #9a3a3a; color: #d09090; }
+.next-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  padding: 10px 28px;
+  background: var(--gold);
+  border: none;
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: 2px;
+  font-weight: 700;
+  transition: all 0.2s;
+  display: none;
+}
+.next-btn.show { display: inline-block; }
+.next-btn:hover { background: var(--gold-light); }
+.result-box {
+  background: #1a1710;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 32px 24px;
+  text-align: center;
+  display: none;
+}
+.result-box.show { display: block; animation: fadeIn 0.5s; }
+.result-score {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 48px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.result-text { color: var(--mist); font-size: 15px; margin-bottom: 20px; }
+.restart-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  padding: 10px 28px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.restart-btn:hover { background: rgba(201,162,39,0.15); }
+
+/* ─── INFO BOXES ─── */
+.info-box {
+  background: #1a1710;
+  border-left: 3px solid var(--blood-mid);
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 3px 3px 0;
+}
+.info-box.gold { border-left-color: var(--gold); }
+.info-box h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.info-box p, .info-box li { color: #c8b890; font-size: 15px; line-height: 1.7; }
+.info-box ul { padding-left: 20px; }
+.info-box li { margin-bottom: 4px; }
+
+/* ─── GLOSSAR ─── */
+.glossar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+}
+.gloss-item {
+  background: #1a1710;
+  border: 1px solid rgba(201,162,39,0.15);
+  border-radius: 3px;
+  padding: 14px 16px;
+}
+.gloss-term {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: var(--gold);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.gloss-def { font-size: 14px; color: #b8a880; line-height: 1.6; }
+
+/* ─── LERNZIELE ─── */
+.lernziel-list { list-style: none; padding: 0; }
+.lernziel-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(201,162,39,0.08);
+  transition: background 0.2s;
+}
+.lernziel-item:hover { background: rgba(201,162,39,0.04); }
+.lernziel-num {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  color: rgba(201,162,39,0.4);
+  font-weight: 700;
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+.lernziel-text { color: #c8b890; font-size: 15px; line-height: 1.7; }
+.lernziel-text strong { color: var(--gold-light); }
+
+/* ─── SATZANFÄNGE ─── */
+.satz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+.satz-item {
+  background: #1a1710;
+  border: 1px solid rgba(201,162,39,0.15);
+  border-radius: 3px;
+  padding: 10px 14px;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: var(--parchment);
+  text-align: center;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .options-grid { grid-template-columns: 1fr; }
+  .char-grid { grid-template-columns: 1fr; }
+  nav { gap: 4px; }
+  .tab-btn { font-size: 10px; padding: 6px 10px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-rune">✦ ✦ ✦</div>
+  <h1 class="main-title">Die Nibelungen</h1>
+  <p class="main-subtitle">Auguste Lechner · Prüfungsvorbereitung · Alessia · KSM Klasse 1a</p>
+</header>
+
+<nav id="nav">
+  <button class="tab-btn active" onclick="showTab('lernziele')">Lernziele</button>
+  <button class="tab-btn" onclick="showTab('handlung')">Handlung</button>
+  <button class="tab-btn" onclick="showTab('figuren')">Figuren</button>
+  <button class="tab-btn" onclick="showTab('zusammenfassung')">Zusammenfassungen</button>
+  <button class="tab-btn" onclick="showTab('fragen')">Fragen & Antworten</button>
+  <button class="tab-btn" onclick="showTab('quiz')">Quiz-Spiel</button>
+  <button class="tab-btn" onclick="showTab('glossar')">Glossar</button>
+</nav>
+
+<main>
+
+<!-- ========= LERNZIELE ========= -->
+<div id="tab-lernziele" class="section active">
+  <h2 class="sec-title">Lernziele der Prüfung</h2>
+  <p class="sec-intro">Mündliche Prüfung am 5./6. Mai 2026 — Alessia (Nr. 12) ist am 5. Mai dran. Prüfungsstoff: Kapitel 1–9.</p>
+
+  <ul class="lernziel-list">
+    <li class="lernziel-item"><span class="lernziel-num">1</span><span class="lernziel-text">Du hast die Kapitel 1–9 gelesen und kannst ab einer <strong>beliebigen Textstelle</strong> die Handlung in ca. <strong>4 Minuten</strong> zusammenfassen.</span></li>
+    <li class="lernziel-item"><span class="lernziel-num">2</span><span class="lernziel-text">Du achtest auf <strong>abwechslungsreiche Satzanfänge / Satzübergänge</strong> und bleibst im <strong>Präsens</strong>.</span></li>
+    <li class="lernziel-item"><span class="lernziel-num">3</span><span class="lernziel-text">Dein Wortschatz entspringt der <strong>Standardsprache</strong> — kein Slang (<em>nicht: cool, geil, krass, mega</em>).</span></li>
+    <li class="lernziel-item"><span class="lernziel-num">4</span><span class="lernziel-text">Du trägst <strong>grammatikalisch korrekt</strong>, laut und deutlich in <strong>Hochdeutsch</strong> vor.</span></li>
+    <li class="lernziel-item"><span class="lernziel-num">5</span><span class="lernziel-text">Du machst so <strong>wenig wie möglich</strong> Grammatik-, Wortschatz- oder Syntaxfehler.</span></li>
+    <li class="lernziel-item"><span class="lernziel-num">6</span><span class="lernziel-text">Du kennst den Inhalt der im Unterricht bearbeiteten <strong>Arbeitsblätter</strong> und kannst die Ergebnisse der Aufgaben erläutern.</span></li>
+  </ul>
+
+  <div class="info-box gold" style="margin-top:28px;">
+    <h4>Abwechslungsreiche Satzanfänge — Übersicht</h4>
+    <div class="satz-grid" style="margin-top:10px;">
+      <div class="satz-item">Zu Beginn …</div>
+      <div class="satz-item">Daraufhin …</div>
+      <div class="satz-item">Kurze Zeit später …</div>
+      <div class="satz-item">In diesem Moment …</div>
+      <div class="satz-item">Aus diesem Grund …</div>
+      <div class="satz-item">Trotzdem …</div>
+      <div class="satz-item">Schliesslich …</div>
+      <div class="satz-item">Von diesem Augenblick an …</div>
+      <div class="satz-item">Infolgedessen …</div>
+      <div class="satz-item">Plötzlich …</div>
+      <div class="satz-item">Tief erschüttert …</div>
+      <div class="satz-item">Voller Kampfeslust …</div>
+      <div class="satz-item">Als Nächstes …</div>
+      <div class="satz-item">Währenddessen …</div>
+      <div class="satz-item">Kaum dass …</div>
+      <div class="satz-item">Um … zu …</div>
+    </div>
+  </div>
+
+  <div class="info-box" style="margin-top:16px;">
+    <h4>4-Minuten-Struktur</h4>
+    <ul>
+      <li><strong>0:00 – 0:30</strong> — Einstieg: «An dieser Stelle der Geschichte …»</li>
+      <li><strong>0:30 – 2:30</strong> — Haupthandlung: Was passiert? Wer sind die Figuren?</li>
+      <li><strong>2:30 – 3:30</strong> — Wendepunkte: Warum handeln die Figuren so?</li>
+      <li><strong>3:30 – 4:00</strong> — Abschluss: Folgen / was kommt danach?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ========= HANDLUNG ========= -->
+<div id="tab-handlung" class="section">
+  <h2 class="sec-title">Handlung — Kapitel 1 bis 9</h2>
+  <p class="sec-intro">Klicke auf ein Kapitel, um es aufzuklappen. Alle Details stammen direkt aus Auguste Lechners Buch.</p>
+
+  <div class="chapter" id="ch1">
+    <div class="chapter-header" onclick="toggleChapter('ch1')">
+      <div><div class="chapter-num">KAPITEL 1 · S. 5–38</div><div class="chapter-title">Siegfrieds Jugend — Lindwurm — Nibelungen</div></div>
+      <span class="chapter-toggle">▼</span>
+    </div>
+    <div class="chapter-body">
+      <div class="scene"><div class="scene-title">Xanten und Meister Mimer</div><p>Siegfried wächst als Königssohn in <strong>Xanten am Rhein</strong> auf — wild, tollkühn, ungestüm. Er vertreibt einen Hofmeister nach dem anderen. Vater König Siegmund schickt ihn zu <strong>Meister Mimer</strong>, einem berühmten Schmied im Wald. Auf dem Weg hört Siegfried vom <strong>Lindwurm im Drachenstein</strong> — von diesem Moment an ist er besessen davon.</p></div>
+      <div class="scene"><div class="scene-title">Kampf mit dem Lindwurm</div><p>Im Drachenstein findet Siegfried das Ungeheuer: riesig, schuppengepanzert, mit steinernen Augen, die ihn fast lähmen. Er reisst sich los und stösst dem <strong>Lindwurm</strong> das Schwert in die weiche Halsunterseite. Der Lindwurm stirbt. Danach badet Siegfried im <strong>Drachenblut</strong> — seine Haut wird hart wie Horn. Nur eine Stelle bleibt schutzlos: zwischen den Schulterblättern, wo ein <strong>Lindenblatt</strong> lag.</p></div>
+      <div class="scene"><div class="scene-title">Nibelungen — Balmung — Tarnkappe</div><p>Siegfried kommt zu den Nibelungen. Er soll den Schatz teilen — die Söhne Schilbung und Nibelung greifen ihn an. Er erschlägt beide mit dem Schwert <strong>Balmung</strong> (schneidet durch Stahl, Stein, Drachenschuppen). Zwergenkönig <strong>Alberich</strong> kämpft unsichtbar mit der Tarnkappe gegen ihn — Siegfried entreisst sie ihm. Alberich schwört Treue. Siegfried behält die <strong>Tarnkappe</strong> (unsichtbar + Zwölfmännerstärke).</p></div>
+      <div class="scene"><div class="scene-title">Fahrt nach Island — Brunhild</div><p>Siegfried hört von der kriegerischen Königin <strong>Brunhild</strong> auf Isenstein und fährt aus Neugier hin. Er wirft beiläufig den Stein weiter als sie und geht ohne ein Wort. Ein fahrender Sänger erzählt später von der schönen <strong>Kriemhild</strong> in Worms — Siegfried beschliesst sofort zu heiraten.</p></div>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch2">
+    <div class="chapter-header" onclick="toggleChapter('ch2')">
+      <div><div class="chapter-num">KAPITEL 2 · S. 38–58</div><div class="chapter-title">Siegfried in Worms — Krieg gegen Sachsen</div></div>
+      <span class="chapter-toggle">▼</span>
+    </div>
+    <div class="chapter-body">
+      <div class="scene"><div class="scene-title">Ankunft in Worms</div><p>Siegfried reitet mit nur zwölf Nibelungen nach Worms — gegen den Rat seines Vaters. <strong>Hagen von Tronje</strong> erkennt ihn sofort und rät: lieber Freund als Feind. Bei der Ankunft provoziert Siegfried Gunther gefährlich. In letzter Sekunde tritt der junge <strong>Giselher</strong> vor und heisst ihn ritterlich willkommen — die Lage ist gerettet.</p></div>
+      <div class="scene"><div class="scene-title">Krieg gegen Sachsen und Dänen</div><p>Die Könige <strong>Lüdeger und Lüdegast</strong> drohen mit Krieg. Siegfried hilft sofort, besiegt Lüdegast im Einzelkampf und entscheidet die ganze Schlacht. Die Burgunden siegen. Siegfried rät: alle Gefangenen frei, ohne Lösegeld. <strong>Kriemhild</strong> hört begierig, was der Bote über Siegfried erzählt.</p></div>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch3">
+    <div class="chapter-header" onclick="toggleChapter('ch3')">
+      <div><div class="chapter-num">KAPITEL 3 · S. 55–58</div><div class="chapter-title">Das Siegesfest — Erster Kuss</div></div>
+      <span class="chapter-toggle">▼</span>
+    </div>
+    <div class="chapter-body">
+      <div class="scene"><div class="scene-title">Kriemhild erscheint</div><p>Beim Siegesfest erscheint <strong>Kriemhild</strong> zum ersten Mal öffentlich — in weisser Seide, Goldschmuck. Es wird ganz still. Siegfried steht neben Giselher, vergisst mitten in einem Satz alles. Als Kriemhild ihm die Hand reicht, strahlen ihre Augen ihn kurz an. <strong>Gernot</strong> schlägt vor, sie solle Siegfried danken. Sie zögert kaum — eine Röte fliegt über ihr Gesicht — und sie küsst ihn. <em>«Als sie ihn küsste, wusste Siegfried, dass er nicht vergebens an den Rhein gekommen war.»</em></p></div>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch4">
+    <div class="chapter-header" onclick="toggleChapter('ch4')">
+      <div><div class="chapter-num">KAPITEL 4 · S. 58–87</div><div class="chapter-title">Handel mit Gunther — Islandfahrt — Hochzeit</div></div>
+      <span class="chapter-toggle">▼</span>
+    </div>
+    <div class="chapter-body">
+      <div class="scene"><div class="scene-title">Der Handel</div><p>Gunther will Brunhild heiraten. Hagen rät, Siegfried zu fragen. Siegfried schlägt ein: <em>«Ich helfe dir — wenn du mir Kriemhild gibst.»</em> Kriemhild näht die Reisegewänder und weint heimlich. Beim Abschied ist sie blass und verbirgt ihre rotgeweinten Augen.</p></div>
+      <div class="scene"><div class="scene-title">Wettkämpfe auf Isenstein</div><p>Brunhild: Speerwurf, Steinwurf, Sprung. Siegfried trägt die Tarnkappe, steht unsichtbar neben Gunther und führt seine Hände. Brunhild verliert zum ersten Mal. Sie muss Gunther heiraten. Brunhild errötet, als sie Siegfried wiedersieht — und merkt, dass etwas nicht stimmt.</p></div>
+      <div class="scene"><div class="scene-title">Hochzeitsnacht</div><p>Brunhild hängt Gunther in der Hochzeitsnacht an die Wand. Siegfried hilft mit der Tarnkappe, ringt mit Brunhild und besiegt sie. Er nimmt ihr <strong>Ring und Gürtel</strong> ab. Brunhilds Kraft ist gebrochen. Er erzählt es Kriemhild — unter striktem Schweigeversprechen.</p></div>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch5">
+    <div class="chapter-header" onclick="toggleChapter('ch5')">
+      <div><div class="chapter-num">KAPITEL 5 · S. 88–120</div><div class="chapter-title">Streit der Königinnen — Siegfrieds Tod — Trauer</div></div>
+      <span class="chapter-toggle">▼</span>
+    </div>
+    <div class="chapter-body">
+      <div class="scene"><div class="scene-title">Streit der Königinnen</div><p>Beim Sommersonnenwendefest in Worms streiten Kriemhild und Brunhild vor dem Dom: Wessen Mann ist grösser? Im Zorn verrät Kriemhild das Geheimnis — zeigt Ring und Gürtel als Beweis. Brunhild ist vernichtet. Sie verlangt von Gunther: <strong>Siegfrieds Tod</strong>.</p></div>
+      <div class="scene"><div class="scene-title">Hagens Plan</div><p>Hagen lügt, es gebe Krieg. Er erschleicht sich von Kriemhild das Geheimnis der verwundbaren Stelle. Sie näht ahnungslos ein <strong>Kreuzlein</strong> aufs Gewand — «damit du ihn schützen kannst». Hagen weiss jetzt alles.</p></div>
+      <div class="scene"><div class="scene-title">Jagd im Odenwald — Tod</div><p>Bei der Jagd lauert Hagen Siegfried an einer Quelle auf. Als er sich bückt, um zu trinken, stösst Hagen ihm den <strong>Ger</strong> ins Kreuzlein. Siegfried stirbt langsam. Seine letzten Worte: «Das wird ewig eure Schande sein!» Er bittet Gunther, für Kriemhild zu sorgen.</p></div>
+      <div class="scene"><div class="scene-title">Kriemhilds Trauer</div><p>Kriemhild erkennt sofort, wer der Mörder ist. Drei Tage und Nächte kniet sie bei der Bahre. Als Hagen vorbeigeht, bluten Siegfrieds Wunden — <strong>Gottesgericht</strong>. König Siegmund kehrt allein nach Xanten zurück. Giselher begleitet ihn ehrenvoll bis zur Grenze.</p></div>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch6">
+    <div class="chapter-header" onclick="toggleChapter('ch6')">
+      <div><div class="chapter-num">KAPITEL 6 · S. 121–134</div><div class="chapter-title">Kriemhild bleibt — Hagen stiehlt den Hort</div></div>
+      <span class="chapter-toggle">▼</span>
+    </div>
+    <div class="chapter-body">
+      <div class="scene"><div class="scene-title">Falsche Versöhnung</div><p>Kriemhild bleibt in Worms, um Siegfrieds Grab nicht zu verlassen. Eine scheinbare Versöhnung mit Gunther findet statt — äusserlich ruhig, innerlich nie verziehen. Sie lässt den <strong>Nibelungenhort</strong> aus dem hohlen Berg nach Worms bringen. Alberich übergibt ihn ehrenvoll.</p></div>
+      <div class="scene"><div class="scene-title">Hagen stiehlt den Hort</div><p>Kriemhild verteilt Gold — an Arme, Mönche, Krieger. Hagen erkennt die Gefahr. In einer stürmischen Nacht raubt er heimlich den gesamten Schatz und versenkt ihn im Rhein. Eine Nixe erscheint im Mondlicht. Hagen sagt Kriemhild ins Gesicht: <em>«Da, wo er jetzt ist, kann er weniger Schaden stiften als in deiner Hand.»</em></p></div>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch7">
+    <div class="chapter-header" onclick="toggleChapter('ch7')">
+      <div><div class="chapter-num">KAPITEL 7 · S. 135–154</div><div class="chapter-title">Rüdiger — Kriemhild heiratet Etzel</div></div>
+      <span class="chapter-toggle">▼</span>
+    </div>
+    <div class="chapter-body">
+      <div class="scene"><div class="scene-title">Rüdiger als Bote</div><p><strong>Markgraf Rüdiger von Bechelaren</strong> erscheint als Bote König Etzels: Etzel hat Königin Helche verloren und sucht eine neue Königin. Hagen ist sofort dagegen. Giselher und Gernot befürworten es.</p></div>
+      <div class="scene"><div class="scene-title">Kriemhilds Entschluss</div><p>Kriemhild fragt Rüdiger: <em>«Schwörst du mir, mich zu rächen?»</em> Er schwört. In diesem Moment entscheidet sie sich — <strong>nicht aus Liebe</strong>, sondern als Mittel zur Rache. Sie reist ab und hinterlässt ihrem Sohn Gunther die Obhut der Nibelungen.</p></div>
+      <div class="scene"><div class="scene-title">Hochzeit in Wien</div><p>Die Reise führt über Bayern, Passau (Bischof Pilgrim), Bechelaren (Empfang bei Gotlinde und Dietlinde). Bei Traismauer empfängt Etzel sie — würdevoll, gerecht, nicht barbarisch. Hochzeit dauert 17 Tage. Dann: Einzug in die Etzelburg.</p></div>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch8">
+    <div class="chapter-header" onclick="toggleChapter('ch8')">
+      <div><div class="chapter-num">KAPITEL 8 · S. 154–164</div><div class="chapter-title">Sieben Jahre — die Einladung</div></div>
+      <span class="chapter-toggle">▼</span>
+    </div>
+    <div class="chapter-body">
+      <div class="scene"><div class="scene-title">Am Hunnenhof</div><p>Kriemhild tut ihre Pflicht als Königin — freudlos. Bekommt Sohn <strong>Ortlieb</strong>. Verteilt Gold an hunnische Krieger für ihre spätere Rache. Nach sieben Jahren bittet sie Etzel, ihre Verwandten einzuladen.</p></div>
+      <div class="scene"><div class="scene-title">Die Falle</div><p>Etzel schickt Spielleute <strong>Swemmel und Werbel</strong> nach Worms. Kriemhild gibt ihnen heimlich den Auftrag: <em>«Hagen muss mitkommen — doppelter Lohn, wenn er kommt.»</em> Hagen erkennt die Falle sofort. Warnt die Könige. Aber alle wollen fahren — Hagen gibt nach: die Tronjer dienten den Burgunden immer bis in den Tod.</p></div>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch9">
+    <div class="chapter-header" onclick="toggleChapter('ch9')">
+      <div><div class="chapter-num">KAPITEL 9 · S. 165–176</div><div class="chapter-title">Die Fahrt — Wasserfrauen — Rüdigers Burg</div></div>
+      <span class="chapter-toggle">▼</span>
+    </div>
+    <div class="chapter-body">
+      <div class="scene"><div class="scene-title">Wasserfrauen-Prophezeiung</div><p>An der Donau findet Hagen drei <strong>Schwanenjungfrauen</strong>. Er stiehlt ihre Gewänder — sie müssen weissagen. Erste lügt. Zweite: <em>«Keiner von euch sieht den Rhein wieder — ihr sterbt alle im Hunnenland.»</em> Dritte: Nur der Kaplan kehrt heim. Hagen wirft den Kaplan ins Wasser — der Priester schwimmt ans Ufer. Das Schicksal lässt sich nicht wenden.</p></div>
+      <div class="scene"><div class="scene-title">Fährmann und Gelfrat</div><p>Hagen tötet den groben Fährmann. Markgraf <strong>Gelfrat</strong> greift in der Nacht an — Dankwart rettet Hagen das Leben. Gelfrat stirbt.</p></div>
+      <div class="scene"><div class="scene-title">Bechelaren — Verlobung Giselher & Dietlinde</div><p>In Bechelaren empfängt <strong>Rüdiger</strong> die Burgunden herzlich. Dietlinde küsst sogar den finsteren Hagen. Giselher verliebt sich in Dietlinde — die <strong>Verlobung</strong> wird beschlossen. Rüdiger schenkt Hagen seinen eigenen Schild. Beim Abschied weinen die Frauen. Ein letzter, friedlicher Moment.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========= FIGUREN ========= -->
+<div id="tab-figuren" class="section">
+  <h2 class="sec-title">Die wichtigsten Figuren</h2>
+  <p class="sec-intro">Für die Prüfung: Figuren mit Namen, Eigenschaften und ihrer Rolle in der Handlung kennen.</p>
+  <div class="char-grid">
+    <div class="char-card">
+      <div class="char-name">Siegfried</div>
+      <div class="char-role">Held · König von Xanten & Nibelungen</div>
+      <div class="char-desc">Als Kind <strong>wild und ungestüm</strong>, später der grösste Held seiner Zeit. <strong>Fast unverwundbar</strong> (Drachenblut), besitzt Balmung und Tarnkappe. Grosszügig, ehrenhaft, aufrichtig verliebt in Kriemhild. Wird hinterrücks ermordet.</div>
+      <div class="char-tags"><span class="char-tag">Furchtlos</span><span class="char-tag">Grosszügig</span><span class="char-tag">Held</span></div>
+    </div>
+    <div class="char-card">
+      <div class="char-name">Kriemhild</div>
+      <div class="char-role">Königin · Schwester der Burgunden</div>
+      <div class="char-desc">Sanft, schön, tugendhaft. Liebt Siegfried von Herzen. Nach seinem Tod: jahrelange tiefe Trauer. Heiratet Etzel — <strong>nicht aus Liebe, sondern für die Rache</strong>. Plant alles jahrelang kühl und geduldig.</div>
+      <div class="char-tags"><span class="char-tag">Sanft</span><span class="char-tag">Rachsüchtig</span><span class="char-tag">Geduldig</span></div>
+    </div>
+    <div class="char-card">
+      <div class="char-name">Hagen von Tronje</div>
+      <div class="char-role">Vasall · «Der Tronjer»</div>
+      <div class="char-desc"><strong>Einäugig, finster, schweigsam.</strong> Treuester Krieger der Burgunden — absolut loyal gegenüber seinen Königen. Plant Siegfrieds Mord, stiehlt den Hort. Warnt vor der Hunnenfahrt, fährt aber mit: die Tronjer dienten immer bis zum Tod.</div>
+      <div class="char-tags"><span class="char-tag">Treu (zu Königen)</span><span class="char-tag">Gefährlich</span><span class="char-tag">Tragisch</span></div>
+    </div>
+    <div class="char-card">
+      <div class="char-name">Gunther</div>
+      <div class="char-role">König von Burgund</div>
+      <div class="char-desc">Würdevoll aber <strong>wankelmütig</strong>. Braucht Siegfrieds Hilfe bei Brunhild. Verspricht Kriemhild als Lohn. Toleriert Siegfrieds Mord trotz schlechtem Gewissen.</div>
+      <div class="char-tags"><span class="char-tag">Schwach</span><span class="char-tag">Wankelmütig</span></div>
+    </div>
+    <div class="char-card">
+      <div class="char-name">Brunhild</div>
+      <div class="char-role">Königin von Island</div>
+      <div class="char-desc">Bildschön, <strong>stolz, herrisch</strong>, übermenschliche Körperkraft. Wird durch Betrug besiegt. Fühlt sich tief gedemütigt. Verlangt Siegfrieds Tod als Sühne für ihre Schande.</div>
+      <div class="char-tags"><span class="char-tag">Stolz</span><span class="char-tag">Stark</span><span class="char-tag">Verletzt</span></div>
+    </div>
+    <div class="char-card">
+      <div class="char-name">Giselher</div>
+      <div class="char-role">Jüngster Burgunderkönig</div>
+      <div class="char-desc"><strong>Blond, offen, gutherzig, ritterlich.</strong> Rettet die Lage bei Siegfrieds Ankunft. Liebt Kriemhild aufrichtig. Verlobt sich in Bechelaren mit Dietlinde.</div>
+      <div class="char-tags"><span class="char-tag">Gutherzig</span><span class="char-tag">Ritterlich</span></div>
+    </div>
+    <div class="char-card">
+      <div class="char-name">Rüdiger von Bechelaren</div>
+      <div class="char-role">Markgraf · Bote Etzels</div>
+      <div class="char-desc"><strong>Gütig, treu, gerecht — von allen geliebt.</strong> Wirbt für Etzel um Kriemhild und schwört ihr, jedes Leid zu rächen. Empfängt die Burgunden herzlich. Verlobt Dietlinde mit Giselher.</div>
+      <div class="char-tags"><span class="char-tag">Ehrenhaft</span><span class="char-tag">Treu</span><span class="char-tag">Gütig</span></div>
+    </div>
+    <div class="char-card">
+      <div class="char-name">König Etzel</div>
+      <div class="char-role">Hunnenkönig</div>
+      <div class="char-desc"><strong>Mächtig, gerecht, offen.</strong> Trauert um Helche. Heiratet Kriemhild und ist gut zu ihr. Ahnt nicht, was sie plant. Versucht den Frieden zu halten.</div>
+      <div class="char-tags"><span class="char-tag">Gerecht</span><span class="char-tag">Mächtig</span></div>
+    </div>
+    <div class="char-card">
+      <div class="char-name">König Siegmund</div>
+      <div class="char-role">König von Xanten · Siegfrieds Vater</div>
+      <div class="char-desc"><strong>Streng, gerecht, besorgt.</strong> Warnt Siegfried ernsthaft vor Worms. Nach dem Mord: will Rache, lässt sich von Kriemhild zurückhalten. Kehrt allein und gebrochen nach Xanten zurück.</div>
+      <div class="char-tags"><span class="char-tag">Besorgt</span><span class="char-tag">Gerecht</span></div>
+    </div>
+    <div class="char-card">
+      <div class="char-name">Alberich</div>
+      <div class="char-role">König der Zwerge</div>
+      <div class="char-desc"><strong>Klein aber furchtlos und ehrenhaft.</strong> Kämpft mit der Tarnkappe unsichtbar gegen Siegfried. Ergibt sich würdevoll und schwört Treue. Hütet den Nibelungenhort treu.</div>
+      <div class="char-tags"><span class="char-tag">Ehrenhaft</span><span class="char-tag">Treu</span></div>
+    </div>
+    <div class="char-card">
+      <div class="char-name">Volker von Alzey</div>
+      <div class="char-role">Spielmann · Kämpfer</div>
+      <div class="char-desc">Ritterlicher <strong>Spielmann und tapferer Krieger.</strong> Hagens treuester Gefährte. Fiedelt nachts Wache an der Tür. Mutig und treu bis zum Ende.</div>
+      <div class="char-tags"><span class="char-tag">Treu</span><span class="char-tag">Mutig</span></div>
+    </div>
+    <div class="char-card">
+      <div class="char-name">Dankwart</div>
+      <div class="char-role">«Der Schnelle» · Hagens Bruder</div>
+      <div class="char-desc"><strong>Schnell und tapfer.</strong> Begleitet die Islandfahrt und später die Hunnenfahrt. Kämpft sich als einziger durch Blödelins Angriff auf die Knechte.</div>
+      <div class="char-tags"><span class="char-tag">Schnell</span><span class="char-tag">Tapfer</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========= ZUSAMMENFASSUNGEN ========= -->
+<div id="tab-zusammenfassung" class="section">
+  <h2 class="sec-title">Muster-Zusammenfassungen</h2>
+  <p class="sec-intro">5 fertige Zusammenfassungen für verschiedene Einstiegsstellen — laut lesen und Zeit messen!</p>
+
+  <div class="summary-card">
+    <div class="summary-label">Zusammenfassung A · Einstieg Kapitel 1</div>
+    <div class="summary-title">Siegfried und der Lindwurm</div>
+    <div class="summary-text">
+      <p>An dieser Stelle der Geschichte ist Siegfried ein junger Königssohn in <strong>Xanten am Rhein</strong> — wild, ungestüm und kaum zu zähmen. Sein Vater schickt ihn zu <strong>Meister Mimer</strong>, einem Schmied im Wald, damit harte Arbeit ihn zur Vernunft bringt.</p>
+      <p>Auf dem Weg dorthin hört Siegfried erstmals vom <strong>Lindwurm im Drachenstein</strong> — einem riesigen Ungeheuer, das die ganze Gegend in Angst versetzt. Von diesem Augenblick an ist er besessen davon. Er schmiedet sich ein Schwert, reisst heimlich aus und reitet direkt zum Drachenstein.</p>
+      <p>Im felsigen Schlund findet er das Ungeheuer: riesig, schuppengepanzert, mit steinernen Augen, die ihn fast lähmen. Mit letzter Kraft reisst er sich los und stösst dem Lindwurm das Schwert in die weiche Halsunterseite. Der Lindwurm stirbt. Danach badet Siegfried im Drachenblut — seine Haut wird fast unverwundbar. Nur eine Stelle bleibt schutzlos: zwischen den Schulterblättern, wo beim Baden ein Lindenblatt lag.</p>
+      <p>Anschliessend besiegt er die <strong>Nibelungen</strong>, erhält das Schwert Balmung und die magische Tarnkappe. Als ein fahrender Sänger von der schönen Kriemhild in Worms erzählt, bricht Siegfried sofort auf — er will sie heiraten.</p>
+    </div>
+    <button class="timer-btn" onclick="startTimer(this)">⏱ 4-Minuten-Timer starten</button>
+    <span class="timer-display"></span>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-label">Zusammenfassung B · Einstieg Kapitel 3</div>
+    <div class="summary-title">Das Siegesfest — Erster Kuss</div>
+    <div class="summary-text">
+      <p>An dieser Stelle hat Siegfried gerade den Burgunden im Krieg gegen <strong>Sachsen und Dänen</strong> geholfen. Alle feiern ein grosses Siegesfest in Worms.</p>
+      <p>Kriemhild erscheint zum <strong>ersten Mal öffentlich</strong> im grossen Saal — in weisser Seide mit reichem Goldschmuck. Es wird ganz still. Siegfried steht neben Giselher und verstummt mitten in einem Satz. Er vergisst alles um sich herum.</p>
+      <p>Als Kriemhild ihm die Hand reicht, strahlen ihre Augen ihn kurz an — dann senkt sie schnell den Blick. Gernot schlägt vor, sie solle Siegfried mit einem Kuss danken. Sie zögert kaum, eine Röte fliegt über ihr Gesicht — und sie küsst ihn. Siegfried weiss: Er ist nicht vergebens nach Worms gekommen.</p>
+      <p>Kurz darauf einigen sich Siegfried und Gunther auf einen Handel: Siegfried hilft, Brunhild zu gewinnen — dafür bekommt er Kriemhild zur Frau. Kriemhild näht die Reisegewänder und weint heimlich, weil sie Siegfried nicht ziehen lassen will.</p>
+    </div>
+    <button class="timer-btn" onclick="startTimer(this)">⏱ 4-Minuten-Timer starten</button>
+    <span class="timer-display"></span>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-label">Zusammenfassung C · Einstieg Kapitel 5</div>
+    <div class="summary-title">Streit der Königinnen — Siegfrieds Tod</div>
+    <div class="summary-text">
+      <p>An dieser Stelle sind Siegfried und Kriemhild seit Jahren glücklich verheiratet. Für ein Fest kommen sie nach Worms zurück.</p>
+      <p>Beim Fest geraten <strong>Kriemhild und Brunhild</strong> in Streit vor dem Dom: Wessen Mann ist grösser? Im Zorn verrät Kriemhild das Geheimnis — Siegfried hat die Wettkämpfe auf Isenstein bestanden, nicht Gunther. Als Beweis zeigt sie Ring und Gürtel. Brunhild ist vernichtet vor Scham. Sie verlangt <strong>Siegfrieds Tod</strong>.</p>
+      <p>Hagen lügt, es gebe Krieg. Er erschleicht sich von Kriemhild das Geheimnis der verwundbaren Stelle — sie näht ahnungslos ein Kreuzlein auf das Gewand. Bei der Jagd im Odenwald stösst Hagen ihm an der Quelle den <strong>Ger ins Kreuzlein</strong>. Siegfried stirbt.</p>
+      <p>Kriemhild erkennt sofort den Mörder. Drei Tage kniet sie bei der Bahre. Als Hagen vorbeigeht, bluten Siegfrieds Wunden — das Gottesgericht bestätigt ihn als Mörder. Von diesem Moment an schwört Kriemhild Rache.</p>
+    </div>
+    <button class="timer-btn" onclick="startTimer(this)">⏱ 4-Minuten-Timer starten</button>
+    <span class="timer-display"></span>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-label">Zusammenfassung D · Einstieg Kapitel 7/8</div>
+    <div class="summary-title">Kriemhild heiratet Etzel</div>
+    <div class="summary-text">
+      <p>An dieser Stelle ist Siegfried seit Jahren tot. Kriemhild lebt als Witwe in Worms. Hagen hat ihr auch den Nibelungenhort geraubt und im Rhein versenkt.</p>
+      <p><strong>Markgraf Rüdiger</strong> erscheint als Bote König Etzels. Etzel hat seine Gemahlin Helche verloren und wirbt um Kriemhild. Hagen ist sofort dagegen.</p>
+      <p>Kriemhild fragt Rüdiger: <em>«Schwörst du mir, mich zu rächen?»</em> Er schwört. In diesem Moment entscheidet sie sich — <strong>nicht aus Liebe, sondern für die Rache</strong>. Die Hochzeit findet in Wien statt.</p>
+      <p>Sieben Jahre am Hunnenhof tut sie ruhig ihre Pflicht — innerlich plant sie alles. Dann bittet sie Etzel, ihre Verwandten einzuladen. Den Boten gibt sie heimlich den Auftrag: Hagen muss mitkommen. Hagen erkennt die Falle, fährt aber mit — die Tronjer dienen den Burgunden immer bis in den Tod.</p>
+    </div>
+    <button class="timer-btn" onclick="startTimer(this)">⏱ 4-Minuten-Timer starten</button>
+    <span class="timer-display"></span>
+  </div>
+
+  <div class="summary-card">
+    <div class="summary-label">Zusammenfassung E · Einstieg Kapitel 9</div>
+    <div class="summary-title">Fahrt ins Hunnenland — Wasserfrauen — Bechelaren</div>
+    <div class="summary-text">
+      <p>An dieser Stelle sind die Burgunden auf dem Weg ins Hunnenland. Hagen reitet voraus, um den Fährmann zu suchen.</p>
+      <p>An der Donau findet er drei <strong>Schwanenjungfrauen</strong> im Wasser. Er stiehlt ihre Gewänder — sie müssen ihm weissagen. Die erste lügt. Die zweite sagt die Wahrheit: <em>«Keiner von euch sieht den Rhein wieder — ihr sterbt alle im Hunnenland.»</em> Die dritte: Nur der Kaplan kehrt heim. Hagen wirft den Kaplan ins Wasser — der Priester schwimmt ans Ufer. Das Schicksal lässt sich nicht abwenden.</p>
+      <p>Hagen tötet den groben Fährmann. In der Nacht greifen <strong>Markgraf Gelfrat</strong> und sein Bruder an — Dankwart rettet Hagen das Leben. Gelfrat stirbt.</p>
+      <p>In <strong>Bechelaren</strong> empfängt Rüdiger die Burgunden herzlich. Giselher verliebt sich in Rüdigers Tochter <strong>Dietlinde</strong> — die Verlobung wird noch am gleichen Abend beschlossen. Rüdiger schenkt Hagen seinen eigenen Schild. Beim Abschied weinen die Frauen.</p>
+    </div>
+    <button class="timer-btn" onclick="startTimer(this)">⏱ 4-Minuten-Timer starten</button>
+    <span class="timer-display"></span>
+  </div>
+</div>
+
+<!-- ========= FRAGEN & ANTWORTEN ========= -->
+<div id="tab-fragen" class="section">
+  <h2 class="sec-title">Fragen &amp; Antworten</h2>
+  <p class="sec-intro">Typische Prüfungsfragen — klicke auf eine Frage, um die Antwort zu sehen.</p>
+
+  <div class="quiz-filter">
+    <button class="filter-btn active" onclick="filterQA('all', this)">Alle</button>
+    <button class="filter-btn" onclick="filterQA('figuren', this)">Figuren</button>
+    <button class="filter-btn" onclick="filterQA('handlung', this)">Handlung</button>
+    <button class="filter-btn" onclick="filterQA('sprache', this)">Sprache</button>
+  </div>
+
+  <div id="qa-list">
+    <div class="quiz-card" data-cat="figuren"><div class="quiz-q" onclick="toggleQA(this)"><span>Warum ist Siegfried fast unverwundbar?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Siegfried tötet den <strong>Lindwurm im Drachenstein</strong> und badet im Drachenblut. Dadurch wird seine Haut so hart wie Horn. Nur eine Stelle bleibt schutzlos: zwischen den Schulterblättern, wo beim Baden ein <strong>Lindenblatt</strong> lag.</div></div>
+    <div class="quiz-card" data-cat="figuren"><div class="quiz-q" onclick="toggleQA(this)"><span>Warum misstraut Hagen Siegfried von Anfang an?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Hagen erkennt sofort, dass Siegfried zu mächtig ist — er <strong>überstrahlt den Ruhm der Burgunden</strong>. Ausserdem gewinnt Siegfried immer mehr Einfluss auf Gunther. Hagen denkt immer zuerst an das Wohl seiner Könige — ein so starker Fremder ist eine Bedrohung.</div></div>
+    <div class="quiz-card" data-cat="figuren"><div class="quiz-q" onclick="toggleQA(this)"><span>Ist Hagen ein Bösewicht — oder eine tragische Figur?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Hagen ist <strong>vielschichtig</strong>: Er tötet Siegfried — aber nicht aus persönlichem Hass, sondern aus Treue zu Gunther. Er warnt vor der Hunnenfahrt, fährt aber mit, weil die Tronjer immer bis in den Tod dienten. Er ist kein einfacher Bösewicht, sondern ein tragischer Charakter — gefangen zwischen Treue und Unrecht.</div></div>
+    <div class="quiz-card" data-cat="figuren"><div class="quiz-q" onclick="toggleQA(this)"><span>Warum bleibt Kriemhild nach Siegfrieds Tod in Worms?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Sie will <strong>Siegfrieds Grab nicht verlassen</strong>. Giselher und Ute überreden sie. Ausserdem hofft sie insgeheim auf Rache — dafür braucht sie Zeit und Geduld.</div></div>
+    <div class="quiz-card" data-cat="figuren"><div class="quiz-q" onclick="toggleQA(this)"><span>Warum heiratet Kriemhild Etzel?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Nicht aus Liebe — sondern weil Rüdiger ihr schwört, jedes Leid zu rächen. Sie begreift: Mit der <strong>Macht der Hunnen</strong> kann sie Hagen und die Burgunden zur Rechenschaft ziehen. Etzel ist ihr Mittel zur Rache.</div></div>
+    <div class="quiz-card" data-cat="figuren"><div class="quiz-q" onclick="toggleQA(this)"><span>Was ist Rüdigers Charakter — und warum ist er wichtig?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Rüdiger ist <strong>gütig, treu, gerecht — von allen geliebt</strong>. Er wirbt für Etzel und schwört Kriemhild Rache. Er empfängt die Burgunden herzlich und verlobt seine Tochter Dietlinde mit Giselher. Er steht am Ende vor einem furchtbaren Gewissenskonflikt.</div></div>
+    <div class="quiz-card" data-cat="handlung"><div class="quiz-q" onclick="toggleQA(this)"><span>Was ist die Tarnkappe — und wozu braucht Siegfried sie?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Die Tarnkappe macht unsichtbar und verleiht <strong>Zwölfmännerstärke</strong>. Siegfried gewinnt sie im Kampf gegen Alberich. Er braucht sie zweimal: um Brunhild für Gunther bei den <strong>Wettkämpfen auf Isenstein</strong> zu besiegen, und um sie in der <strong>Hochzeitsnacht</strong> zu bezwingen.</div></div>
+    <div class="quiz-card" data-cat="handlung"><div class="quiz-q" onclick="toggleQA(this)"><span>Was ist der Nibelungenhort — und was passiert damit?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Der Nibelungenhort ist ein <strong>unermesslicher Schatz</strong> aus Gold und Edelsteinen — Siegfrieds Morgengabe an Kriemhild. Nach seinem Tod holt Kriemhild ihn nach Worms. Hagen raubt ihn in einer stürmischen Nacht und versenkt ihn im Rhein — damit Kriemhild keine Macht aufbauen kann.</div></div>
+    <div class="quiz-card" data-cat="handlung"><div class="quiz-q" onclick="toggleQA(this)"><span>Wie plant Hagen Siegfrieds Mord genau?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Er erfindet einen falschen Krieg. Dann geht er zu Kriemhild und gibt vor, Siegfried schützen zu wollen — er bittet sie, die verwundbare Stelle zu markieren. Kriemhild näht <strong>ahnungslos ein Kreuzlein</strong> auf das Gewand. Bei der Jagd im Odenwald lauert er Siegfried an einer Quelle auf und stösst ihm den <strong>Ger ins Kreuzlein</strong>.</div></div>
+    <div class="quiz-card" data-cat="handlung"><div class="quiz-q" onclick="toggleQA(this)"><span>Was bewirkt der Streit der Königinnen?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Kriemhild verrät im Streit mit Brunhild das Geheimnis: Nicht Gunther, sondern <strong>Siegfried</strong> hat die Kämpfe auf Isenstein bestanden. Als Beweis zeigt sie Ring und Gürtel. Brunhild fühlt sich tief gedemütigt und verlangt <strong>Siegfrieds Tod</strong>.</div></div>
+    <div class="quiz-card" data-cat="handlung"><div class="quiz-q" onclick="toggleQA(this)"><span>Was weissagen die Wasserfrauen Hagen?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Die erste lügt. Die zweite sagt die Wahrheit: <em>«Keiner von euch sieht den Rhein wieder — ihr sterbt alle im Hunnenland.»</em> Die dritte: Nur der Kaplan kehrt heim. Hagen wirft den Kaplan ins Wasser, um das Schicksal zu wenden — der Priester schwimmt ans Ufer. Das <strong>Schicksal lässt sich nicht abwenden</strong>.</div></div>
+    <div class="quiz-card" data-cat="handlung"><div class="quiz-q" onclick="toggleQA(this)"><span>Was geschieht in Bechelaren bei Rüdiger?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Rüdiger empfängt die Burgunden herzlich. Giselher verliebt sich in Rüdigers Tochter <strong>Dietlinde</strong> — die Verlobung wird beschlossen. Rüdiger schenkt Hagen seinen eigenen Schild. Beim Abschied weinen die Frauen. Es ist ein letzter, friedlicher Moment — alle ahnen, dass sie sich nie mehr sehen werden.</div></div>
+    <div class="quiz-card" data-cat="sprache"><div class="quiz-q" onclick="toggleQA(this)"><span>Was bedeutet «Standardsprache» — was darf Alessia NICHT sagen?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Kein Slang! <strong>Nicht sagen:</strong> «cool», «geil», «krass», «mega», «voll». <strong>Stattdessen:</strong> «bewundernswert», «grossartig», «erschreckend», «aussergewöhnlich», «gewaltig». Auch kein Dialekt — immer Hochdeutsch.</div></div>
+    <div class="quiz-card" data-cat="sprache"><div class="quiz-q" onclick="toggleQA(this)"><span>Warum immer im Präsens erzählen?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a">Das ist eine Lernzielbedingung. Im Präsens erzählen heisst: <strong>«Siegfried reitet nach Worms»</strong> — NICHT «Siegfried ritt». Das macht die Handlung lebendiger und zeigt, dass man den Text wirklich kennt.</div></div>
+    <div class="quiz-card" data-cat="sprache"><div class="quiz-q" onclick="toggleQA(this)"><span>Wie kann ich eine 4-Minuten-Zusammenfassung gut strukturieren?</span><span class="quiz-q-icon">+</span></div><div class="quiz-a"><strong>0:00–0:30</strong> Einstieg: «An dieser Stelle der Geschichte …» · <strong>0:30–2:30</strong> Haupthandlung: Was passiert? · <strong>2:30–3:30</strong> Wendepunkte / Motivationen: Warum? · <strong>3:30–4:00</strong> Abschluss: Folgen / was kommt danach?</div></div>
+  </div>
+</div>
+
+<!-- ========= QUIZ SPIEL ========= -->
+<div id="tab-quiz" class="section">
+  <h2 class="sec-title">Quiz-Spiel</h2>
+  <p class="sec-intro">Teste dein Wissen! 3 Joker verfügbar: 50:50, Tipp, Überspringen.</p>
+
+  <div class="quiz-game">
+    <div class="quiz-score" id="score-display">Frage 1 von 10</div>
+    <div class="quiz-progress" id="progress-bar"></div>
+    <div class="question-box" id="question-box">Lade Fragen…</div>
+    <div class="joker-bar">
+      <button class="joker-btn" id="joker-5050" onclick="use5050()">50:50</button>
+      <button class="joker-btn" id="joker-tipp" onclick="useTipp()">💡 Tipp</button>
+      <button class="joker-btn" id="joker-skip" onclick="useSkip()">⏭ Überspringen</button>
+    </div>
+    <div class="options-grid" id="options-grid"></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="next-btn" id="next-btn" onclick="nextQuestion()">WEITER →</button>
+    <div class="result-box" id="result-box">
+      <div class="result-score" id="result-score"></div>
+      <div class="result-text" id="result-text"></div>
+      <button class="restart-btn" onclick="restartQuiz()">Nochmal spielen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========= GLOSSAR ========= -->
+<div id="tab-glossar" class="section">
+  <h2 class="sec-title">Glossar — wichtige Begriffe</h2>
+  <p class="sec-intro">Wörter, die man für die Prüfung kennen muss.</p>
+  <div class="glossar-grid">
+    <div class="gloss-item"><div class="gloss-term">Lindwurm</div><div class="gloss-def">Anderes Wort für Drache. Im Buch kämpft Siegfried gegen den Lindwurm im Drachenstein — nicht «Fafner» (das ist die alte Sage).</div></div>
+    <div class="gloss-item"><div class="gloss-term">Balmung</div><div class="gloss-def">Siegfrieds magisches Schwert — schneidet durch Stahl, Stein und Drachenschuppen. Er gewinnt es von den Nibelungenkönigen.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Tarnkappe</div><div class="gloss-def">Magische Kappe: macht unsichtbar und verleiht Zwölfmännerstärke. Siegfried gewinnt sie von Alberich.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Nibelungenhort</div><div class="gloss-def">Unermesslicher Schatz aus Gold und Edelsteinen. Gehört zuerst den Nibelungen, dann Siegfried, dann Kriemhild. Hagen versenkt ihn im Rhein.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Drachenstein</div><div class="gloss-def">Der felsige Berg, in dem der Lindwurm haust. Siegfried kämpft dort allein gegen das Ungeheuer.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Isenstein</div><div class="gloss-def">Die Burg von Königin Brunhild auf Island. Dort finden die Wettkämpfe statt.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Ger</div><div class="gloss-def">Wurfspeer mit Eisenspitze. Hagen tötet Siegfried mit einem Ger an der Quelle.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Tronjer</div><div class="gloss-def">Beiname von Hagen von Tronje — «der Tronjer». Bezeichnet seinen Herkunftsort.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Recke</div><div class="gloss-def">Heldenhafter Ritter — tapferer Kämpfer.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Kemenate</div><div class="gloss-def">Beheizbarer Raum auf der Burg (mit Kamin) — oft das Frauengemach.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Söller</div><div class="gloss-def">Art Balkon auf der Burg — von Säulen getragen oder auf einem flachen Dach.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Fahrender / Fahrende</div><div class="gloss-def">Wandernde Spielleute (Sänger, Musikanten), die Neuigkeiten und Geschichten von Burg zu Burg tragen.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Lehen / Lehensmann</div><div class="gloss-def">Der König verleiht einem Fürsten Land und Rechte (Lehen). Der Fürst schuldet ihm dafür Treue und Kriegshilfe.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Markgraf</div><div class="gloss-def">Hoher Fürstentitel — ursprünglich zuständig für den Schutz der Reichsgrenzen. Rüdiger ist Markgraf von Bechelaren.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Morgengabe</div><div class="gloss-def">Hochzeitsgeschenk des Bräutigams für die Braut am Morgen nach der Hochzeit. Siegfried schenkt Kriemhild den Nibelungenhort als Morgengabe.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Oheim</div><div class="gloss-def">Mittelhochdeutsch für Onkel (Bruder der Mutter). Hagen ist «Oheim» der drei Burgundenkönige.</div></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ─── TAB NAVIGATION ───
+function showTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ─── CHAPTER ACCORDION ───
+function toggleChapter(id) {
+  const ch = document.getElementById(id);
+  ch.classList.toggle('open');
+}
+
+// ─── QA ACCORDION ───
+function toggleQA(el) {
+  const card = el.parentElement;
+  const wasOpen = card.classList.contains('open');
+  document.querySelectorAll('.quiz-card').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) card.classList.add('open');
+  el.querySelector('.quiz-q-icon').textContent = card.classList.contains('open') ? '−' : '+';
+}
+
+// ─── QA FILTER ───
+function filterQA(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#qa-list .quiz-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+
+// ─── TIMER ───
+const timers = {};
+function startTimer(btn) {
+  const key = btn.dataset.key || (btn.dataset.key = Math.random());
+  const display = btn.nextElementSibling;
+  if (timers[key]) {
+    clearInterval(timers[key]);
+    delete timers[key];
+    btn.textContent = '⏱ 4-Minuten-Timer starten';
+    display.textContent = '';
+    return;
+  }
+  let secs = 240;
+  btn.textContent = '⏹ Stoppen';
+  timers[key] = setInterval(() => {
+    secs--;
+    const m = Math.floor(secs / 60), s = secs % 60;
+    display.textContent = `${m}:${s.toString().padStart(2,'0')}`;
+    if (secs <= 0) {
+      clearInterval(timers[key]);
+      delete timers[key];
+      btn.textContent = '⏱ 4-Minuten-Timer starten';
+      display.textContent = '✅ Zeit!';
+    }
+  }, 1000);
+}
+
+// ─── QUIZ GAME ───
+const allQuestions = [
+  { q: "Warum ist Siegfried fast unverwundbar?", a: "Er badet im Drachenblut nach dem Kampf mit dem Lindwurm.", opts: ["Er trägt eine magische Rüstung.", "Er badet im Drachenblut nach dem Kampf mit dem Lindwurm.", "Er hat einen Zauberring.", "Er schläft jeden Nacht auf Drachenschuppen."], tipp: "Denke an das Blut des Lindwurms." },
+  { q: "Wie heisst Siegfrieds magisches Schwert?", a: "Balmung", opts: ["Excalibur", "Balmung", "Nothung", "Drachentöter"], tipp: "Er erhält es von den Nibelungenkönigen." },
+  { q: "Was macht die Tarnkappe?", a: "Sie macht unsichtbar und verleiht Zwölfmännerstärke.", opts: ["Sie macht unsichtbar und verleiht Zwölfmännerstärke.", "Sie schützt vor Schwertern.", "Sie ermöglicht das Fliegen.", "Sie verleiht ewiges Leben."], tipp: "Zwei Eigenschaften: unsichtbar + Kraft." },
+  { q: "Wer rettet die Lage bei Siegfrieds gefährlicher Ankunft in Worms?", a: "Giselher — er heisst Siegfried ritterlich willkommen.", opts: ["Hagen — er zieht das Schwert.", "Gernot — er kämpft gegen Siegfried.", "Giselher — er heisst Siegfried ritterlich willkommen.", "Gunther — er schickt Siegfried fort."], tipp: "Es ist der jüngste der drei Brüder." },
+  { q: "Was ist der Nibelungenhort?", a: "Ein unermesslicher Schatz aus Gold und Edelsteinen.", opts: ["Eine magische Tarnkappe.", "Ein unermesslicher Schatz aus Gold und Edelsteinen.", "Das Schwert Balmung.", "Ein verzauberter Helm."], tipp: "Siegfried gibt ihn Kriemhild als Morgengabe." },
+  { q: "Was verrät Kriemhild im Streit mit Brunhild?", a: "Dass Siegfried (nicht Gunther) die Wettkämpfe auf Isenstein bestanden hat.", opts: ["Dass Brunhild in Wirklichkeit nicht stark ist.", "Dass Siegfried (nicht Gunther) die Wettkämpfe auf Isenstein bestanden hat.", "Dass Gunther ein schlechter König ist.", "Dass Etzel Brunhild liebt."], tipp: "Sie zeigt Ring und Gürtel als Beweis." },
+  { q: "Was weissagt die zweite Wasserfrau Hagen?", a: "Keiner von ihnen wird den Rhein je wiedersehen — sie sterben alle im Hunnenland.", opts: ["Sie werden reichen Lohn bekommen.", "Keiner von ihnen wird den Rhein je wiedersehen — sie sterben alle im Hunnenland.", "Hagen wird König werden.", "Kriemhild verzeiht ihm."], tipp: "Die zweite sagt die bittere Wahrheit." },
+  { q: "Warum heiratet Kriemhild König Etzel?", a: "Als Mittel zur Rache — mit seiner Macht will sie Hagen bestrafen.", opts: ["Weil sie ihn liebt.", "Weil Ute es von ihr verlangt.", "Als Mittel zur Rache — mit seiner Macht will sie Hagen bestrafen.", "Weil Etzel der reichste König ist."], tipp: "Rüdigers Schwur ist der entscheidende Moment." },
+  { q: "Wer schenkt Hagen in Bechelaren seinen eigenen Schild?", a: "Rüdiger von Bechelaren", opts: ["Giselher", "Dietlinde", "Rüdiger von Bechelaren", "Gunther"], tipp: "Es ist der Markgraf, der sie herzlich empfängt." },
+  { q: "Wo liegt die verwundbare Stelle bei Siegfried?", a: "Zwischen den Schulterblättern — wo beim Drachenblut-Bad ein Lindenblatt lag.", opts: ["Am linken Handgelenk.", "Zwischen den Schulterblättern — wo beim Drachenblut-Bad ein Lindenblatt lag.", "Am Herz.", "An der rechten Ferse."], tipp: "Ein Blatt vom Baum fiel beim Bad auf ihn." },
+  { q: "Was ist das Gottesgericht bei Siegfrieds Beerdigung?", a: "Siegfrieds Wunden bluten erneut, als Hagen an der Bahre vorbeigeht.", opts: ["Eine Stimme vom Himmel nennt den Mörder.", "Siegfrieds Wunden bluten erneut, als Hagen an der Bahre vorbeigeht.", "Hagens Schwert bricht entzwei.", "Ein Gewitter bricht los."], tipp: "Es ist ein mittelalterlicher Glaube: Wunden bluten beim Mörder." },
+  { q: "Was ist die Etzelburg?", a: "Die riesige Burg von König Etzel, Herrscher der Hunnen.", opts: ["Kriemhilds Burg in Worms.", "Die riesige Burg von König Etzel, Herrscher der Hunnen.", "Die Burg der Nibelungen.", "Rüdigers Burg in Bechelaren."], tipp: "Hier findet das Fest statt, zu dem die Burgunden eingeladen werden." }
+];
+
+let questions = [], current = 0, score = 0, jokers = { '5050': true, 'tipp': true, 'skip': true };
+
+function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+function initQuiz() {
+  questions = shuffle(allQuestions).slice(0, 10);
+  current = 0; score = 0;
+  jokers = { '5050': true, 'tipp': true, 'skip': true };
+  ['joker-5050','joker-tipp','joker-skip'].forEach(id => {
+    document.getElementById(id).disabled = false;
+  });
+  document.getElementById('result-box').classList.remove('show');
+  buildProgress();
+  showQuestion();
+}
+
+function buildProgress() {
+  const bar = document.getElementById('progress-bar');
+  bar.innerHTML = questions.map((_, i) => `<div class="progress-dot" id="dot-${i}"></div>`).join('');
+}
+
+function showQuestion() {
+  const q = questions[current];
+  document.getElementById('score-display').textContent = `Frage ${current + 1} von ${questions.length}  ·  Punkte: ${score}`;
+  document.getElementById('question-box').textContent = q.q;
+  document.getElementById('feedback').classList.remove('show','correct-fb','wrong-fb');
+  document.getElementById('next-btn').classList.remove('show');
+
+  document.querySelectorAll('.progress-dot').forEach((d, i) => {
+    d.classList.remove('current','done');
+    if (i < current) d.classList.add('done');
+    if (i === current) d.classList.add('current');
+  });
+
+  const grid = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  shuffle(q.opts).forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(btn, opt, q.a);
+    grid.appendChild(btn);
+  });
+}
+
+function selectAnswer(btn, selected, correct) {
+  document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+  const fb = document.getElementById('feedback');
+  if (selected === correct) {
+    btn.classList.add('correct');
+    score++;
+    fb.textContent = '✅ Richtig!';
+    fb.className = 'feedback show correct-fb';
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('.option-btn').forEach(b => { if (b.textContent === correct) b.classList.add('correct'); });
+    fb.innerHTML = `❌ Falsch. Richtig wäre: <strong>${correct}</strong>`;
+    fb.className = 'feedback show wrong-fb';
+  }
+  document.getElementById('score-display').textContent = `Frage ${current + 1} von ${questions.length}  ·  Punkte: ${score}`;
+  document.getElementById('next-btn').classList.add('show');
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= questions.length) {
+    showResult();
+  } else {
+    showQuestion();
+  }
+}
+
+function showResult() {
+  document.getElementById('question-box').style.display = 'none';
+  document.getElementById('options-grid').style.display = 'none';
+  document.getElementById('joker-bar') && (document.querySelector('.joker-bar').style.display = 'none');
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('next-btn').classList.remove('show');
+  document.getElementById('score-display').textContent = '';
+
+  const pct = Math.round(score / questions.length * 100);
+  let msg = score >= 9 ? '🏆 Ausgezeichnet! Perfekt vorbereitet!' : score >= 7 ? '⭐ Sehr gut! Noch ein paar Details üben.' : score >= 5 ? '👍 Gut! Lies die Handlung nochmals durch.' : '📖 Mehr üben! Kapitel für Kapitel wiederholen.';
+
+  document.getElementById('result-score').textContent = `${score} / ${questions.length}`;
+  document.getElementById('result-text').innerHTML = `${pct}% richtig<br>${msg}`;
+  document.getElementById('result-box').classList.add('show');
+}
+
+function restartQuiz() {
+  document.getElementById('question-box').style.display = '';
+  document.getElementById('options-grid').style.display = '';
+  document.querySelector('.joker-bar').style.display = '';
+  initQuiz();
+}
+
+function use5050() {
+  if (!jokers['5050']) return;
+  jokers['5050'] = false;
+  document.getElementById('joker-5050').disabled = true;
+  const q = questions[current];
+  const btns = [...document.querySelectorAll('.option-btn')];
+  const wrong = btns.filter(b => b.textContent !== q.a);
+  shuffle(wrong).slice(0, 2).forEach(b => { b.disabled = true; b.style.opacity = '0.2'; });
+}
+
+function useTipp() {
+  if (!jokers['tipp']) return;
+  jokers['tipp'] = false;
+  document.getElementById('joker-tipp').disabled = true;
+  const q = questions[current];
+  const fb = document.getElementById('feedback');
+  fb.textContent = '💡 Tipp: ' + q.tipp;
+  fb.className = 'feedback show';
+}
+
+function useSkip() {
+  if (!jokers['skip']) return;
+  jokers['skip'] = false;
+  document.getElementById('joker-skip').disabled = true;
+  nextQuestion();
+}
+
+// Init
+initQuiz();
+</script>
+</body>
+</html>
